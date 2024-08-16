@@ -8,10 +8,10 @@ plugins {
 }
 
 version = '1.0.0'
-group = 'com.swacky.totemaccessory'
+group = 'com.swacky.elytraaccessory'
 
 base {
-    archivesName = 'totemaccessory'
+    archivesName = 'elytraaccessory'
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -32,20 +32,20 @@ minecraft {
 
 
         client {
-            property 'forge.enabledGameTestNamespaces', 'totemaccessory'
+            property 'forge.enabledGameTestNamespaces', 'elytraaccessory'
         }
 
         server {
-            property 'forge.enabledGameTestNamespaces', 'totemaccessory'
+            property 'forge.enabledGameTestNamespaces', 'elytraaccessory'
         }
 
         gameTestServer {
-            property 'forge.enabledGameTestNamespaces', 'totemaccessory'
+            property 'forge.enabledGameTestNamespaces', 'elytraaccessory'
         }
 
         data {
             workingDirectory project.file('run')
-            args '--mod', 'totemaccessory', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'elytraaccessory', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
         }
     }
 }
@@ -77,20 +77,20 @@ dependencies {
 }
 
 mixin {
-    config "totemaccessory.mixins.json"
+    config "elytraaccessory.mixins.json"
 }
 
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "totemaccessory",
-                "Specification-Vendor"    : "totemaccessoryswacky",
+                "Specification-Title"     : "elytraaccessory",
+                "Specification-Vendor"    : "elytraaccessoryswacky",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "totemaccessoryswacky",
+                "Implementation-Vendor"   : "elytraaccessoryswacky",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "totemaccessory.mixins.json"
+                "MixinConfigs": "elytraaccessory.mixins.json"
         ])
     }
 }

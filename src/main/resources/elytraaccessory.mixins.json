@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.swacky.elytraaccessory.common.core.mixin",
+  "compatibilityLevel": "JAVA_18",
+  "mixins": [
+    "LivingEntityMixin",
+    "PlayerMixin"
+  ],
+  "client": [
+    "CapeLayerMixin",
+    "ElytraLayerMixin",
+    "LocalPlayerMixin"
+  ],
+  "minVersion": "0.8.5"
+}

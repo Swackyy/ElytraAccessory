@@ -2,25 +2,25 @@ modLoader="javafml"
 loaderVersion="[51,53)"
 license="All rights reserved"
 [[mods]]
-modId="totemaccessory"
+modId="elytraaccessory"
 version="${file.jarVersion}"
-displayName="Totem Accessory"
-logoFile= "totemaccessory.png"
+displayName="Elytra Accessory"
+logoFile= "elytraaccessory.png"
 authors="Developer: Swacky_"
-description='''Allows Totems of Undying to be equipped as an accessory (Ohmega API)'''
-[[dependencies.totemaccessory]]
+description='''Allows Elytras to be equipped as an accessory (Ohmega API)'''
+[[dependencies.elytraaccessory]]
 modId="forge"
 mandatory=true
 versionRange="[51,53)"
 ordering="NONE"
 side="BOTH"
-[[dependencies.totemaccessory]]
+[[dependencies.elytraaccessory]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.21,1.21.2)"
 ordering="NONE"
 side="BOTH"
-[[dependencies.totemaccessory]]
+[[dependencies.elytraaccessory]]
 modId="ohmega"
 mandatory=true
 versionRange="[1.2.1,)"

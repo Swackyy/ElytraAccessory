@@ -1,7 +1,7 @@
-package com.swacky.totemaccessory.event;
+package com.swacky.elytraaccessory.event;
 
 import com.swacky.ohmega.api.AccessoryHelper;
-import com.swacky.totemaccessory.common.core.TotemAccessory;
+import com.swacky.elytraaccessory.common.core.ElytraAccessory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -16,11 +16,11 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = TotemAccessory.MODID)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = ElytraAccessory.MODID)
 public class CommonForgeEvents {
     @SubscribeEvent
     public static void onItemUse(PlayerInteractEvent.RightClickItem event) {
-        if (event.getItemStack().is(Items.TOTEM_OF_UNDYING)) {
+        if (event.getItemStack().is(Items.ELYTRA)) {
             InteractionResult result = AccessoryHelper.tryEquip(event.getEntity(), event.getHand()).getResult();
             if(result == InteractionResult.SUCCESS) {
                 event.setCanceled(true);
@@ -32,10 +32,10 @@ public class CommonForgeEvents {
     @SubscribeEvent
     public static void hoverText(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
-        if(stack.is(Items.TOTEM_OF_UNDYING)) {
+        if(stack.is(Items.ELYTRA)) {
             List<Component> tooltip = event.getToolTip();
-            tooltip.add(MutableComponent.create(new TranslatableContents("item." + TotemAccessory.MODID + ".totem.tooltip", null, TranslatableContents.NO_ARGS)).withStyle(ChatFormatting.GRAY));
-            tooltip.add(AccessoryHelper.getTypeTooltip(AccessoryHelper.getBoundAccessory(Items.TOTEM_OF_UNDYING)));
+            tooltip.add(MutableComponent.create(new TranslatableContents("item." + ElytraAccessory.MODID + ".elytra.tooltip", null, TranslatableContents.NO_ARGS)).withStyle(ChatFormatting.GRAY));
+            tooltip.add(AccessoryHelper.getTypeTooltip(AccessoryHelper.getBoundAccessory(Items.ELYTRA)));
         }
     }
 }
