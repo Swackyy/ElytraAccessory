@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.swacky.elytraaccessory.common.core.mixin",
+  "package": "com.swacky.elytra_accessory.common.core.mixin",
   "compatibilityLevel": "JAVA_18",
   "mixins": [
     "LivingEntityMixin",

@@ -1,0 +1,6 @@
+{
+  "elytra": {
+    "emptySlotTexture": "item/accessory_slot_elytra",
+    "priority": 0
+  }
+}

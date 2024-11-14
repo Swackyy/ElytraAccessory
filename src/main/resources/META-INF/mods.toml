@@ -1,28 +1,28 @@
 modLoader="javafml"
-loaderVersion="[51,53)"
-license="All rights reserved"
+loaderVersion="${loader_version_range}"
+license="MIT"
 [[mods]]
-modId="elytraaccessory"
-version="${file.jarVersion}"
+modId="${mod_id}"
+version="${mod_version}"
 displayName="Elytra Accessory"
-logoFile= "elytraaccessory.png"
-authors="Developer: Swacky_"
+logoFile= "${mod_id}.png"
+authors="${mod_authors}"
 description='''Allows Elytras to be equipped as an accessory (Ohmega API)'''
-[[dependencies.elytraaccessory]]
+[[dependencies.${mod_id}]]
 modId="forge"
 mandatory=true
-versionRange="[51,53)"
+versionRange="${forge_version_range}"
 ordering="NONE"
 side="BOTH"
-[[dependencies.elytraaccessory]]
+[[dependencies.${mod_id}]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.21,1.21.2)"
+versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
-[[dependencies.elytraaccessory]]
+[[dependencies.${mod_id}]]
 modId="ohmega"
 mandatory=true
-versionRange="[1.2.1,)"
+versionRange="${ohmega_version_range}"
 ordering="BEFORE"
 side="BOTH"
