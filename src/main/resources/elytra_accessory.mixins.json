@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "com.swacky.elytra_accessory.common.core.mixin",
-  "compatibilityLevel": "JAVA_18",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
     "PlayerMixin"

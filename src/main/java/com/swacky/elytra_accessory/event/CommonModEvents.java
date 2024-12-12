@@ -3,7 +3,7 @@ package com.swacky.elytra_accessory.event;
 import com.swacky.ohmega.api.AccessoryHelper;
 import com.swacky.ohmega.api.IAccessory;
 import com.swacky.elytra_accessory.common.core.ElytraAccessory;
-import com.swacky.ohmega.common.core.init.OhmegaItems;
+import com.swacky.ohmega.common.init.OhmegaItems;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

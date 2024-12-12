@@ -1,28 +1,36 @@
 modLoader="javafml"
-loaderVersion="${loader_version_range}"
-license="MIT"
+loaderVersion="${loaderForgeV}"
+issueTrackerURL="${issuesUrl}"
+license="${license}"
+
+
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="Elytra Accessory"
-logoFile= "${mod_id}.png"
-authors="${mod_authors}"
-description='''Allows Elytras to be equipped as an accessory (Ohmega API)'''
-[[dependencies.${mod_id}]]
+modId="${modId}"
+version="${modV}"
+displayName="${modName}"
+displayURL="${curseUrl}"
+logoFile= "${modId}.png"
+authors="${modAuthors}"
+description='''${modDesc}'''
+
+
+[[dependencies.${modId}]]
 modId="forge"
 mandatory=true
-versionRange="${forge_version_range}"
+versionRange="${loaderForgeVRange}"
 ordering="NONE"
 side="BOTH"
-[[dependencies.${mod_id}]]
+
+[[dependencies.${modId}]]
 modId="minecraft"
 mandatory=true
-versionRange="${minecraft_version_range}"
+versionRange="[${mcV}]"
 ordering="NONE"
 side="BOTH"
-[[dependencies.${mod_id}]]
+
+[[dependencies.${modId}]]
 modId="ohmega"
 mandatory=true
-versionRange="${ohmega_version_range}"
+versionRange="${ohmegaVRange}"
 ordering="BEFORE"
 side="BOTH"

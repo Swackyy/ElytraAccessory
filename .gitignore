@@ -12,6 +12,6 @@ build
 run
 
 #misc
-genRuns.bat
+gr.bat
 src/generated
 libs
