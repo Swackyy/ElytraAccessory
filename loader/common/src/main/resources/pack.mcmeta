@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": {
+      "translate": "dataPack.${modId}.description"
+    },
+    "min_format": [
+      ${packFormatMaxV},
+      ${packFormatMinV}
+    ],
+    "max_format": ${packFormatMaxV}
+  }
+}

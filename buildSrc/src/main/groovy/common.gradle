@@ -1,0 +1,53 @@
+plugins {
+    id "java"
+}
+
+group "com.swacky.${modId}"
+
+base {
+    archivesName.set "${modId}-${modV}"
+}
+
+java {
+    toolchain.languageVersion.set JavaLanguageVersion.of(javaV)
+}
+
+processResources {
+    var replaceProperties = [
+            modId          : modId,
+            packFormatMinV : packFormatMinV,
+            packFormatMaxV : packFormatMaxV
+    ]
+
+    inputs.properties replaceProperties
+
+    filesMatching(["pack.mcmeta", "resourcepacks/*/pack.mcmeta"]) {
+        expand replaceProperties
+    }
+
+    exclude "META-INF/accesstransformer.cfg"
+}
+
+repositories {
+    maven {
+        name = "Curse maven"
+        url = "https://cursemaven.com"
+
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+    options.release.set JavaLanguageVersion.of(javaV).asInt()
+}
+
+['apiElements', 'runtimeElements'].each { variant ->
+    configurations."${variant}".outgoing {
+        capability("${group}:${base.archivesName.get()}:${version}")
+        capability("${group}:${modId}-${project.name}-${mcV}:${version}")
+        capability("${group}:${modId}:$version")
+    }
+}

@@ -1,120 +1,13 @@
 plugins {
+    id "fabric-loom" version "${pluginLoomV}" apply false
     id "idea"
-    id "java"
-    id "net.minecraftforge.gradle" version "${pluginForgeV}"
-    id "org.spongepowered.mixin" version "0.7.+"
-    id "org.parchmentmc.librarian.forgegradle" version "1.+"
+    id "net.minecraftforge.gradle" version "${pluginForgeV}" apply false
+    id "net.neoforged.moddev" version "${pluginNeoV}" apply false
 }
 
 idea {
     module {
-        downloadJavadoc = true
-        downloadSources = true
+        downloadJavadoc true
+        downloadSources true
     }
-}
-
-java {
-    toolchain.languageVersion.set JavaLanguageVersion.of(javaV)
-}
-
-group "com.swacky.${modId}"
-
-base {
-    archivesName.set "${modId}-${modV}"
-}
-
-version "forge+${mcV}"
-
-mixin {
-    config "${modId}.mixins.json"
-}
-
-minecraft {
-    if (mapsMcV == mcV) {
-        mappings channel: "parchment", version: "${mapsV}-${mapsMcV}"
-    } else {
-        mappings channel: "parchment", version: "${mapsMcV}-${mapsV}-${mcV}"
-    }
-    reobf false
-    copyIdeResources.set true
-    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    runs {
-        configureEach {
-            workingDirectory file("run")
-
-            property "forge.logging.markers", "REGISTRIES"
-            property "forge.logging.console.level", "debug"
-            property "forge.enabledGameTestNamespaces", "${modId}"
-        }
-
-
-        client {
-        }
-
-        server {
-        }
-
-        data {
-            args "--mod", "${modId}", "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources/")
-        }
-    }
-}
-
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
-}
-
-dependencies {
-    minecraft "net.minecraftforge:forge:${mcV}-${loaderForgeV}"
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
-    compileOnly fileTree(include: ['*.jar'], dir: 'libs')
-}
-
-processResources {
-    var replaceProperties = [
-            license                  : license,
-            loaderForgeV             : loaderForgeV,
-            loaderForgeVRange        : loaderForgeVRange,
-            modId                    : modId,
-            modV                     : modV,
-            modAuthors               : modAuthorsDisplay,
-            mcV                      : mcV,
-            modName                  : modName,
-            issuesUrl                : "${gitUrl}/issues",
-            curseUrl                 : curseUrl,
-            modDesc                  : modDesc,
-            ohmegaVRange             : ohmegaVRange
-    ]
-    inputs.properties replaceProperties
-
-    filesMatching('META-INF/mods.toml') {
-        expand replaceProperties
-    }
-}
-
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"    : modId,
-                "Specification-Vendor"   : modAuthors,
-                "Specification-Version"  : modV,
-                "Implementation-Title"   : project.name,
-                "Implementation-Version" : modV,
-                "Implementation-Vendor"  : modAuthors,
-                "MixinConfigs"           : "${modId}.mixins.json"
-        ])
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-    options.release.set JavaLanguageVersion.of(javaV).asInt()
-}
-
-sourceSets.each {
-    def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
-    it.output.resourcesDir = dir
-    it.java.destinationDirectory = dir
 }

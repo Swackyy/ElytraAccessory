@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.swacky.elytra_accessory.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MappedRegistryMixin"
+  ],
+  "client": [
+    "client.ArmedEntityRenderStateMixin2",
+    "client.WingsLayerMixin2"
+  ],
+  "minVersion": "0.8.5"
+}

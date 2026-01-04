@@ -1,0 +1,43 @@
+plugins {
+    id "common"
+    id "net.neoforged.moddev"
+}
+
+neoForge {
+    neoFormVersion = "${mcV}-${neoFormV}"
+
+    parchment {
+        mappingsVersion.set mapsV
+        minecraftVersion.set mapsMcV
+    }
+}
+
+sourceSets.main.resources {
+    srcDir "src/generated/resources"
+}
+
+dependencies {
+    implementation 'org.ow2.asm:asm:9.9.1'
+    implementation group:'org.spongepowered', name:'mixin', version:'0.8.5'
+    implementation group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
+    annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
+
+    implementation "curse.maven:ohmega-889368:${loaderFabricOhmegaFileId}"
+}
+
+configurations {
+    commonJava {
+        canBeResolved false
+        canBeConsumed true
+    }
+
+    commonResources {
+        canBeResolved false
+        canBeConsumed true
+    }
+}
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources sourceSets.main.resources.sourceDirectories.files
+}

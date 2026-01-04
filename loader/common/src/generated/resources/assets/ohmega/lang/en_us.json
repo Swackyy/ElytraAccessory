@@ -1,0 +1,8 @@
+{
+  "accessory_type.elytra_accessory.elytra": "Elytra",
+  "dataPack.elytra_accessory.description": "Mod resources for Elytra Accessory",
+  "dataPack.elytra_type.description": "Makes elytras use the built-in elytra type",
+  "dataPack.elytra_type.name": "Elytra Type",
+  "key.elytra_accessory.elytra": "Elytra %s",
+  "tag.item.elytra_accessory.elytra": "Elytra"
+}

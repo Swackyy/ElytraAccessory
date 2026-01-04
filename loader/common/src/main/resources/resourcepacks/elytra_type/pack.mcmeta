@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": {
+      "translate": "dataPack.elytra_type.description"
+    },
+    "min_format": [
+      ${packFormatMaxV},
+      ${packFormatMinV}
+    ],
+    "max_format": ${packFormatMaxV}
+  }
+}
