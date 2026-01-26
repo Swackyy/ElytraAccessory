@@ -1,11 +1,8 @@
 plugins {
     id "loader"
     id "net.minecraftforge.gradle"
-    id "org.parchmentmc.librarian.forgegradle" version "1.+"
     id "org.spongepowered.mixin" version "0.7.+"
 }
-
-version = "forge+${mcV}"
 
 mixin {
     config "${modId}.mixins.json"
@@ -13,11 +10,7 @@ mixin {
 }
 
 minecraft {
-    if (mapsMcV == mcV) {
-        mappings channel: "parchment", version: "${mapsV}-${mapsMcV}"
-    } else {
-        mappings channel: "parchment", version: "${mapsMcV}-${mapsV}-${mcV}"
-    }
+    mappings channel: "official", version: mcV
 
     reobf = false
     accessTransformer = file "src/main/resources/META-INF/accesstransformer.cfg"
@@ -44,9 +37,6 @@ dependencies {
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     annotationProcessor "net.minecraftforge:eventbus-validator:7.0-beta.7"
-
-    implementation("net.sf.jopt-simple:jopt-simple:5.0.4") { version { strictly "5.0.4" } }
-    implementation "curse.maven:ohmega-889368:${loaderForgeOhmegaFileId}"
 }
 
 jar {

@@ -21,6 +21,9 @@
     ],
     "client": [
       "com.swacky.${modId}.client.ElytraAccessoryClient"
+    ],
+    "fabric-datagen": [
+      "com.swacky.${modId}.datagen.ElytraAccessoryDataGeneration"
     ]
   },
   "mixins": [
@@ -31,7 +34,8 @@
     "fabricloader": "${loaderFabricVRange}",
     "minecraft": "${mcV}",
     "java": ">=${javaV}",
-    "fabric-api": "*"
+    "fabric-api": "*",
+    "ohmega": "${loaderFabricOhmegaVRange}"
   },
   "custom": {
     "modmenu": {

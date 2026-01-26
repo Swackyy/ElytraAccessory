@@ -3,8 +3,6 @@ plugins {
     id "loader"
 }
 
-version "fabric+${mcV}"
-
 loom {
     mods {
         "${modId}" {
@@ -65,5 +63,15 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${loaderFabricApiV}+${mcV}"
     modImplementation "com.terraformersmc:modmenu:${loaderFabricModMenuV}"
     modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${loaderFabricForgeConfigApiPortV}"
-    implementation "curse.maven:ohmega-889368:${loaderFabricOhmegaFileId}"
+    modImplementation "io.github.swackyy:ohmega-${project.name}:${ohmegaV}-mc${mcV}"
+}
+
+fabricApi {
+    configureDataGeneration {
+        outputDirectory = file(project(":loader:common").sourceSets.main.resources.getSourceDirectories().getFiles()[1].getAbsolutePath())
+    }
+}
+
+tasks.withType(Jar).configureEach {
+    setDuplicatesStrategy DuplicatesStrategy.EXCLUDE
 }

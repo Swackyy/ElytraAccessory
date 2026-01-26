@@ -3,8 +3,6 @@ plugins {
     id "net.neoforged.moddev"
 }
 
-version "neoforge+${mcV}"
-
 neoForge {
     version = loaderNeoV
 
@@ -37,18 +35,7 @@ neoForge {
         server {
             server()
         }
-
-        clientData {
-            clientData()
-
-            ideName.set "Data Generation"
-            programArguments.addAll "--mod", "${modId}", "--all", "--output", project(":loader:common").getDependencyProject().sourceSets.main.resources.getSourceDirectories().getFiles()[1].getAbsolutePath() , "--existing", project(":loader:common").getDependencyProject().sourceSets.main.resources.getSourceDirectories().getFiles()[0].getAbsolutePath()
-        }
     }
-}
-
-dependencies {
-    implementation "curse.maven:ohmega-889368:${loaderNeoOhmegaFileId}"
 }
 
 tasks.named("compileTestJava") {

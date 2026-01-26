@@ -27,3 +27,10 @@ mandatory=true
 versionRange="[${mcV}]"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.${modId}]]
+modId="ohmega"
+mandatory=true
+versionRange="${ohmegaVRange}"
+ordering="NONE"
+side="BOTH"

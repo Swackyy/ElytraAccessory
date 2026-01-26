@@ -20,7 +20,6 @@ abstract class LivingEntityMixin1 extends Entity implements Attackable, Waypoint
 
     @Inject(method = "isEquippableInSlot", at = @At(value = "HEAD"), cancellable = true)
     public void isEquippableInSlot(ItemStack stack, EquipmentSlot slot, CallbackInfoReturnable<Boolean> cir) {
-        // IntelliSense has no idea what to do here
         //noinspection ConstantValue
         if (stack.has(DataComponents.GLIDER) && ((Object) this) instanceof Player player) {
             for (ItemStack stack0 : AccessoryHelper.getStacks(player)) {

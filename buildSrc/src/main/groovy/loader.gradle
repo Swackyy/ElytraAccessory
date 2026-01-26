@@ -1,6 +1,7 @@
 plugins {
     id "common"
     id "java"
+    id "me.modmuss50.mod-publish-plugin"
 }
 
 configurations {
@@ -11,6 +12,10 @@ configurations {
     "commonResources" {
         canBeResolved = true
     }
+}
+
+java {
+    withSourcesJar()
 }
 
 dependencies {
@@ -26,23 +31,25 @@ dependencies {
 
 processResources {
     var replaceProperties = [
-            license                              : license,
-            loaderForgeV                         : loaderForgeV,
-            loaderForgeVRange                    : loaderForgeVRange,
-            loaderNeoV                           : loaderNeoV,
-            loaderNeoVRange                      : loaderNeoVRange,
-            loaderFabricVRange                   : loaderFabricVRange,
-            modId                                : modId,
-            modV                                 : modV,
-            modAuthors                           : modAuthorsDisplay,
+            javaV                                : javaV,
             mcV                                  : mcV,
+            loaderFabricVRange                   : loaderFabricVRange,
+            loaderForgeVRange                    : loaderForgeVRange,
+            loaderNeoVRange                      : loaderNeoVRange,
+            loaderFabricOhmegaVRange             : loaderFabricOhmegaVRange,
+            ohmegaVRange                         : ohmegaVRange,
+            loaderForgeV                         : loaderForgeV,
+            loaderNeoV                           : loaderNeoV,
+            modV                                 : modV,
+            license                              : license,
             modName                              : modNameDisplay,
+            modId                                : modId,
+            modAuthors                           : modAuthorsDisplay,
             gitUrl                               : gitUrl,
             curseUrl                             : curseUrl,
             discordUrl                           : discordUrl,
             modrinthUrl                          : modrinthUrl,
             modDesc                              : modDesc,
-            javaV                                : javaV
     ]
     inputs.properties replaceProperties
 
@@ -55,10 +62,60 @@ processResources {
 
 jar {
     from configurations.commonResources
-
     setDuplicatesStrategy DuplicatesStrategy.EXCLUDE
+}
+
+tasks.named("sourcesJar") {
+    from project(":loader:common").sourceSets.main.allSource
+    exclude "META-INF/accesstransformer.cfg"
 }
 
 tasks.withType(JavaCompile).configureEach {
     source configurations.commonJava
+}
+
+tasks.withType(Copy).configureEach {
+    setDuplicatesStrategy DuplicatesStrategy.EXCLUDE
+}
+
+if (rootProject.file("secrets.properties").exists()) {
+    publishMods {
+        String name = project.name == "neoforge" ? "NeoForge" : project.name.capitalize()
+
+        changelog = ""
+        displayName = "${modName} ${modV} ${name} ${mcV}"
+
+        if (project.name == "fabric") {
+            file = project.tasks.named("remapJar").flatMap {
+                it.archiveFile
+            }
+        } else {
+            file = jar.archiveFile
+        }
+
+        type = STABLE
+
+        additionalFiles.from(sourcesJar.archiveFile)
+        modLoaders.add(project.name)
+
+        curseforge {
+            accessToken = findProperty("secretsCurseForgeToken")
+            clientRequired = true
+            projectId = "1085348"
+            serverRequired = true
+
+            javaVersions.add(JavaVersion.toVersion(javaV))
+            minecraftVersions.add(mcV)
+            requires "ohmega"
+        }
+
+        modrinth {
+            accessToken = findProperty("secretsModrinthToken")
+            projectId = "pLVRp7qd"
+            version = modV
+
+            minecraftVersions.add(mcV)
+            requires "ohmega"
+        }
+    }
 }

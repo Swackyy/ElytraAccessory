@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,12 +23,8 @@ public class ArmedEntityRenderStateMixin1 implements ArmedEntityRenderStateExten
     private NonNullList<ItemStack> elytraAccessory$stacks = null;
 
     @Override
-    public NonNullList<ItemStack> elytraAccessory$getItems() {
-        if (elytraAccessory$stacks != null) {
-            return elytraAccessory$stacks;
-        } else {
-            throw new NullPointerException("Return value should not be null when queried");
-        }
+    public @Nullable NonNullList<ItemStack> elytraAccessory$getItems() {
+        return elytraAccessory$stacks;
     }
 
     @Override

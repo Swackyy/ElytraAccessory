@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.swacky.elytra_accessory.mixinutils.extension.ArmedEntityRenderStateExtension;
 import net.minecraft.client.renderer.entity.layers.WingsLayer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,9 +26,13 @@ public class WingsLayerMixin1 {
                     opcode = Opcodes.GETFIELD))
     public ItemStack submit(ItemStack original, @Local(argsOnly = true) HumanoidRenderState state) {
         if (!LivingEntity.canGlideUsing(original, EquipmentSlot.CHEST)) {
-            for (ItemStack stack : ((ArmedEntityRenderStateExtension) state).elytraAccessory$getItems()) {
-                if (stack.has(DataComponents.GLIDER)) {
-                    return stack;
+            NonNullList<ItemStack> stacks = ((ArmedEntityRenderStateExtension) state).elytraAccessory$getItems();
+
+            if (stacks != null) {
+                for (ItemStack stack : stacks) {
+                    if (stack.has(DataComponents.GLIDER)) {
+                        return stack;
+                    }
                 }
             }
         }

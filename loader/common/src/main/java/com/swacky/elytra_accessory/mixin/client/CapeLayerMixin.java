@@ -5,6 +5,7 @@ import com.swacky.elytra_accessory.mixinutils.extension.ArmedEntityRenderStateEx
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.layers.CapeLayer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,9 +23,13 @@ abstract class CapeLayerMixin {
                     value = "HEAD"),
             cancellable = true)
     public void submit(PoseStack poseStack, SubmitNodeCollector collector, int i, AvatarRenderState state, float j, float k, CallbackInfo ci) {
-        for (ItemStack stack : ((ArmedEntityRenderStateExtension) state).elytraAccessory$getItems()) {
-            if (stack.has(DataComponents.GLIDER)) {
-                ci.cancel();
+        NonNullList<ItemStack> stacks = ((ArmedEntityRenderStateExtension) state).elytraAccessory$getItems();
+
+        if (stacks != null) {
+            for (ItemStack stack : stacks) {
+                if (stack.has(DataComponents.GLIDER)) {
+                    ci.cancel();
+                }
             }
         }
     }

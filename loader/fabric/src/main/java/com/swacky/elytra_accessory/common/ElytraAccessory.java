@@ -9,7 +9,7 @@ import net.minecraft.resources.Identifier;
 
 @SuppressWarnings("unused")
 public class ElytraAccessory implements ModInitializer {
-    private static final Identifier ID = Identifier.fromNamespaceAndPath(ElytraAccessoryCommon.MODID, "elytra_type");
+    private static final Identifier ID = ElytraAccessoryCommon.id("elytra_type");
 
     @Override
     public void onInitialize() {

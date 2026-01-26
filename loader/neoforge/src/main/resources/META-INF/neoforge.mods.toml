@@ -34,3 +34,10 @@ type="required"
 versionRange="[${mcV}]"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.${modId}]]
+modId="ohmega"
+type="required"
+versionRange="${ohmegaVRange}"
+ordering="NONE"
+side="BOTH"

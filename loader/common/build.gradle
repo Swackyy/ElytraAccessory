@@ -18,11 +18,9 @@ sourceSets.main.resources {
 
 dependencies {
     implementation 'org.ow2.asm:asm:9.9.1'
-    implementation group:'org.spongepowered', name:'mixin', version:'0.8.5'
-    implementation group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
-    annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
-
-    implementation "curse.maven:ohmega-889368:${loaderFabricOhmegaFileId}"
+    implementation "org.spongepowered:mixin:0.8.7"
+    implementation "io.github.llamalad7:mixinextras-common:0.5.2"
+    annotationProcessor "io.github.llamalad7:mixinextras-common:0.5.2"
 }
 
 configurations {
