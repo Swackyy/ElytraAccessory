@@ -1,16 +1,9 @@
 plugins {
-    id "fabric-loom"
     id "loader"
+    id "net.fabricmc.fabric-loom" version "${pluginLoomV}"
 }
 
 loom {
-    mods {
-        "${modId}" {
-            sourceSet sourceSets.main
-            sourceSet project(":loader:common").sourceSets.main
-        }
-    }
-
     runs {
         configureEach {
             setConfigName "Fabric ${it.name.capitalize()}"
@@ -49,21 +42,13 @@ repositories {
 }
 
 dependencies {
-    commonJava project(path: ":loader:common", configuration: "commonJava")
-    commonResources project(path: ":loader:common", configuration: "commonResources")
-
     minecraft "com.mojang:minecraft:${mcV}"
 
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${mapsMcV}:${mapsV}@zip")
-    }
-
-    modImplementation "net.fabricmc:fabric-loader:${loaderFabricV}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${loaderFabricApiV}+${mcV}"
-    modImplementation "com.terraformersmc:modmenu:${loaderFabricModMenuV}"
-    modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${loaderFabricForgeConfigApiPortV}"
-    modImplementation "io.github.swackyy:ohmega-${project.name}:${ohmegaV}-mc${mcV}"
+    implementation "net.fabricmc:fabric-loader:${loaderFabricV}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${loaderFabricApiV}+${mcV}"
+    implementation "com.terraformersmc:modmenu:${loaderFabricModMenuV}"
+    implementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${loaderFabricForgeConfigApiPortV}"
+    implementation "io.github.swackyy:ohmega-fabric:${ohmegaV}-mc${mcV}"
 }
 
 fabricApi {

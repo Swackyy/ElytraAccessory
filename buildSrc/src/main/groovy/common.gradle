@@ -13,7 +13,13 @@ base {
 }
 
 java {
-    toolchain.languageVersion.set JavaLanguageVersion.of(javaV)
+    JavaLanguageVersion javaVersion = JavaLanguageVersion.of(javaV);
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    toolchain.languageVersion = javaVersion
+
+    withJavadocJar()
+    withSourcesJar()
 }
 
 processResources {
@@ -28,11 +34,10 @@ processResources {
     filesMatching(["pack.mcmeta", "resourcepacks/*/pack.mcmeta"]) {
         expand replaceProperties
     }
-
-    exclude "META-INF/accesstransformer.cfg"
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 
     maven {
@@ -46,8 +51,6 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jspecify:jspecify:1.0.0"
-
     if (project.name != "fabric") {
         implementation "io.github.swackyy:ohmega-${project.name}:${ohmegaV}-mc${mcV}"
     }
@@ -58,14 +61,34 @@ tasks.withType(JavaCompile).configureEach {
     options.release.set JavaLanguageVersion.of(javaV).asInt()
 }
 
+tasks.withType(Javadoc).configureEach {
+    options.quiet()
+}
+
+jar {
+    exclude "**/.cache"
+}
+
+tasks.named("sourcesJar", Jar) {
+    exclude "**/.cache"
+}
+
+tasks.named("compileTestJava") {
+    enabled = false
+}
+
+tasks.named("processTestResources") {
+    enabled = false
+}
+
 tasks.withType(GenerateModuleMetadata).configureEach {
     enabled = false
 }
 
-['apiElements', 'runtimeElements'].each { variant ->
+["apiElements", "runtimeElements", "sourcesElements", "javadocElements"].each { variant ->
     configurations."${variant}".outgoing {
-        capability("${group}:${base.archivesName.get()}:${version}")
-        capability("${group}:${modId}-${project.name}-${mcV}:${version}")
-        capability("${group}:${modId}:$version")
+        capability "${group}:${base.archivesName.get()}:${version}"
+        capability "${group}:${modId}-${project.name}-${mcV}:${version}"
+        capability "${group}:${modId}:$version"
     }
 }

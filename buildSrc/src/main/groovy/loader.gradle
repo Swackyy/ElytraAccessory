@@ -5,17 +5,13 @@ plugins {
 }
 
 configurations {
-    "commonJava" {
+    commonJava {
         canBeResolved = true
     }
 
-    "commonResources" {
+    commonResources {
         canBeResolved = true
     }
-}
-
-java {
-    withSourcesJar()
 }
 
 dependencies {
@@ -51,13 +47,24 @@ processResources {
             modrinthUrl                          : modrinthUrl,
             modDesc                              : modDesc,
     ]
-    inputs.properties replaceProperties
 
+    inputs.properties replaceProperties
     filesMatching(["META-INF/mods.toml", "META-INF/neoforge.mods.toml", "fabric.mod.json"]) {
         expand replaceProperties
     }
 
     from configurations.commonResources
+    setDuplicatesStrategy DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(JavaCompile).configureEach {
+    source configurations.commonJava
+    dependsOn configurations.commonJava
+}
+
+tasks.withType(Javadoc).configureEach {
+    dependsOn configurations.commonJava
+    source configurations.commonJava
 }
 
 jar {
@@ -65,57 +72,50 @@ jar {
     setDuplicatesStrategy DuplicatesStrategy.EXCLUDE
 }
 
-tasks.named("sourcesJar") {
+tasks.named("sourcesJar", Jar) {
     from project(":loader:common").sourceSets.main.allSource
-    exclude "META-INF/accesstransformer.cfg"
-}
-
-tasks.withType(JavaCompile).configureEach {
-    source configurations.commonJava
-}
-
-tasks.withType(Copy).configureEach {
     setDuplicatesStrategy DuplicatesStrategy.EXCLUDE
 }
 
 if (rootProject.file("secrets.properties").exists()) {
-    publishMods {
-        String name = project.name == "neoforge" ? "NeoForge" : project.name.capitalize()
+    afterEvaluate {
+        publishMods {
+            String name = project.name == "neoforge" ? "NeoForge" : project.name.capitalize()
 
-        changelog = ""
-        displayName = "${modName} ${modV} ${name} ${mcV}"
+            changelog = ""
+            displayName = "${modName} ${modV} ${name} ${mcV}"
 
-        if (project.name == "fabric") {
-            file = project.tasks.named("remapJar").flatMap {
+            file = tasks.named("jar").flatMap {
                 it.archiveFile
             }
-        } else {
-            file = jar.archiveFile
-        }
 
-        type = STABLE
+            type = modV.contains("alpha") ? ALPHA : modV.contains("beta") ? BETA : STABLE
 
-        additionalFiles.from(sourcesJar.archiveFile)
-        modLoaders.add(project.name)
+            additionalFiles.from tasks.named("sourcesJar").flatMap {
+                it.archiveFile
+            }
 
-        curseforge {
-            accessToken = findProperty("secretsCurseForgeToken")
-            clientRequired = true
-            projectId = "1085348"
-            serverRequired = true
+            modLoaders.add(project.name)
 
-            javaVersions.add(JavaVersion.toVersion(javaV))
-            minecraftVersions.add(mcV)
-            requires "ohmega"
-        }
+            curseforge {
+                accessToken = findProperty("secretsCurseForgeToken")
+                clientRequired = true
+                projectId = "1085348"
+                serverRequired = true
 
-        modrinth {
-            accessToken = findProperty("secretsModrinthToken")
-            projectId = "pLVRp7qd"
-            version = modV
+                javaVersions.add(JavaVersion.toVersion(javaV))
+                minecraftVersions.add(mcV)
+                requires "ohmega"
+            }
 
-            minecraftVersions.add(mcV)
-            requires "ohmega"
+            modrinth {
+                accessToken = findProperty("secretsModrinthToken")
+                projectId = "pLVRp7qd"
+                version = modV
+
+                minecraftVersions.add(mcV)
+                requires "ohmega"
+            }
         }
     }
 }

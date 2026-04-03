@@ -18,6 +18,11 @@ public class GliderBinding implements IAccessory {
     }
 
     @Override
+    public boolean compatibleWith(@NonNull ItemStack other) {
+        return IAccessory.super.compatibleWith(other) && !other.has(DataComponents.GLIDER);
+    }
+
+    @Override
     public @Nullable Holder<SoundEvent> getEquipSound() {
         return SoundEvents.ARMOR_EQUIP_ELYTRA;
     }

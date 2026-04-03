@@ -1,16 +1,18 @@
 package com.swacky.elytra_accessory.event;
 
 import com.swacky.elytra_accessory.common.ElytraAccessoryCommon;
-import net.minecraft.core.registries.BuiltInRegistries;
+import com.swacky.ohmega.api.event.AccessoryOverrideTypesEvent;
+import com.swacky.ohmega.common.accessorytype.AccessoryType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
 @EventBusSubscriber(modid = ElytraAccessoryCommon.MODID)
 public class CommonEvents {
@@ -26,9 +28,14 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public static void onSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            CommonCallbacks.onPostItemRegistry(BuiltInRegistries.ITEM);
-        });
+    public static void onOverrideAccessoryTypes(AccessoryOverrideTypesEvent event) {
+        for (Item item : ElytraAccessoryCommon.BOUND_ITEMS) {
+            event.overrideRemaps.put(item, AccessoryType.UTILITY.get());
+        }
+    }
+
+    @SubscribeEvent
+    public static void onServerStart(ServerStartedEvent event) {
+        CommonCallbacks.bindElytras();
     }
 }
