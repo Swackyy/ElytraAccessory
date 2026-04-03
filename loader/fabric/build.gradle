@@ -46,9 +46,9 @@ dependencies {
 
     implementation "net.fabricmc:fabric-loader:${loaderFabricV}"
     implementation "net.fabricmc.fabric-api:fabric-api:${loaderFabricApiV}+${mcV}"
-    implementation "com.terraformersmc:modmenu:${loaderFabricModMenuV}"
     implementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${loaderFabricForgeConfigApiPortV}"
     implementation "io.github.swackyy:ohmega-fabric:${ohmegaV}-mc${mcV}"
+    //implementation "com.terraformersmc:modmenu:${loaderFabricModMenuV}"
 }
 
 fabricApi {
