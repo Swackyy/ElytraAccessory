@@ -5,7 +5,7 @@ Contains a built-in Elytra Accessory Type data-pack
 
 ---
 ## Requirements (dependencies)
-**This mod requires [Ohmega](https://github.com/Swackyy/Ohmega) version 1.5.x+**
+**This mod requires [Ohmega](https://github.com/Swackyy/Ohmega) version 1.5.x**
 
 ## Other links
 [Report issues here](https://github.com/Swackyy/Ohmega/issues)

@@ -8,8 +8,8 @@ loom {
         configureEach {
             setConfigName "Fabric ${it.name.capitalize()}"
 
-            runDir = "run"
             ideConfigGenerated = true
+            runDir = "run"
         }
 
         client {
@@ -34,11 +34,6 @@ repositories {
         name = "ModMenu"
         url = "https://maven.terraformersmc.com/releases"
     }
-
-    maven {
-        name = "Parchment"
-        url = "https://maven.parchmentmc.org"
-    }
 }
 
 dependencies {
@@ -47,7 +42,6 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${loaderFabricV}"
     implementation "net.fabricmc.fabric-api:fabric-api:${loaderFabricApiV}+${mcV}"
     implementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${loaderFabricForgeConfigApiPortV}"
-    implementation "io.github.swackyy:ohmega-fabric:${ohmegaV}-mc${mcV}"
     //implementation "com.terraformersmc:modmenu:${loaderFabricModMenuV}"
 }
 

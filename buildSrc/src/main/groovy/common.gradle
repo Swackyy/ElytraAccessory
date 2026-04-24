@@ -37,18 +37,6 @@ processResources {
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
-
-    maven {
-        name = "Curse maven"
-        url = "https://cursemaven.com"
-
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-
     maven {
         name = "Sponge"
         url = "https://repo.spongepowered.org/repository/maven-public"
@@ -56,9 +44,7 @@ repositories {
 }
 
 dependencies {
-    if (project.name != "fabric") {
-        implementation "io.github.swackyy:ohmega-${project.name}:${ohmegaV}-mc${mcV}"
-    }
+    implementation "io.github.swackyy:ohmega-${project.name}:${ohmegaV}-mc${mcV}"
 }
 
 tasks.withType(JavaCompile).configureEach {
