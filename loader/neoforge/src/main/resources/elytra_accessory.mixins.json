@@ -3,7 +3,7 @@
   "package": "com.swacky.elytra_accessory.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LivingEntityMixin2"
+    "NeoForge_LivingEntityMixin"
   ],
   "client": [
     "client.ArmedEntityRenderStateMixin1",
