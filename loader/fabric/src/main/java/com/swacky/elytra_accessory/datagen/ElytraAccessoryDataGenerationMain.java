@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 import org.jspecify.annotations.NonNull;
 
 @SuppressWarnings("unused")
-public class ElytraAccessoryDataGeneration implements DataGeneratorEntrypoint {
+public class ElytraAccessoryDataGenerationMain implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(@NonNull FabricDataGenerator generator) {
         FabricDataGenerator.Pack pack = generator.createPack();

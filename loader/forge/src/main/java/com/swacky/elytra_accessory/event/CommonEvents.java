@@ -1,6 +1,6 @@
 package com.swacky.elytra_accessory.event;
 
-import com.swacky.elytra_accessory.common.ElytraAccessoryCommon;
+import com.swacky.elytra_accessory.common.ElytraAccessory;
 import com.swacky.ohmega.api.common.accessorytype.AccessoryType;
 import com.swacky.ohmega.api.event.AccessoryBindEvent;
 import com.swacky.ohmega.api.event.AccessoryOverrideTypesEvent;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Optional;
 
-@Mod.EventBusSubscriber(modid = ElytraAccessoryCommon.MODID)
+@Mod.EventBusSubscriber(modid = ElytraAccessory.MODID)
 public class CommonEvents {
     @SubscribeEvent
     public static void onAddPackFinders(AddPackFindersEvent event) {
@@ -28,11 +28,11 @@ public class CommonEvents {
             event.addRepositorySource(consumer -> {
                 var pack = Pack.readMetaAndCreate(
                         new PackLocationInfo(
-                                Identifier.fromNamespaceAndPath(ElytraAccessoryCommon.MODID, "elytra_type").toString(),
+                                Identifier.fromNamespaceAndPath(ElytraAccessory.MODID, "elytra_type").toString(),
                                 Component.translatable("dataPack.elytra_type.name"),
                                 PackSource.FEATURE,
                                 Optional.empty()),
-                        new PathPackResources.PathResourcesSupplier(ModList.getModFileById(ElytraAccessoryCommon.MODID)
+                        new PathPackResources.PathResourcesSupplier(ModList.getModFileById(ElytraAccessory.MODID)
                                 .getFile().findResource("resourcepacks/elytra_type")),
                         PackType.SERVER_DATA,
                         new PackSelectionConfig(false, Pack.Position.TOP, false));
@@ -51,7 +51,7 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void onOverrideAccessoryTypes(AccessoryOverrideTypesEvent event) {
-        for (Item item : ElytraAccessoryCommon.BOUND_ITEMS) {
+        for (Item item : ElytraAccessory.BOUND_ITEMS) {
             event.add(item, AccessoryType.UTILITY.get(), false);
         }
     }

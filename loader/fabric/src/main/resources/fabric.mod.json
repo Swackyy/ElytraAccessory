@@ -23,7 +23,7 @@
       "com.swacky.${modId}.client.ElytraAccessoryClientMain"
     ],
     "fabric-datagen": [
-      "com.swacky.${modId}.datagen.ElytraAccessoryDataGeneration"
+      "com.swacky.${modId}.datagen.ElytraAccessoryDataGenerationMain"
     ]
   },
   "mixins": [
