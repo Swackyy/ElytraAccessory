@@ -2,8 +2,8 @@ package com.swacky.elytra_accessory.event;
 
 import com.swacky.elytra_accessory.common.ElytraAccessoryCommon;
 import com.swacky.elytra_accessory.common.accessory.GliderBinding;
-import com.swacky.ohmega.api.AccessoryHelper;
-import net.minecraft.core.NonNullList;
+import com.swacky.ohmega.api.common.item.Accessories;
+import com.swacky.ohmega.api.common.item.AccessoryHelper;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -12,14 +12,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class CommonCallbacks {
+public final class CommonCallbacks {
     public static boolean onElytraFlight(LivingEntity living, boolean shouldTick) {
         if (living instanceof Player player) {
-            NonNullList<ItemStack> stacks = AccessoryHelper.getStacks(player);
-
-            for (int i = 0; i < stacks.size(); i++) {
-                ItemStack stack = stacks.get(i);
-
+            for (ItemStack stack : AccessoryHelper.getData(player).getStacks()) {
                 if (LivingEntity.canGlideUsing(stack, EquipmentSlot.CHEST)) {
                     if (shouldTick) {
                         // Basically copy and paste to ensure vanilla behaviour
@@ -30,10 +26,6 @@ public class CommonCallbacks {
 
                             if (k % 2 == 0) {
                                 stack.hurtAndBreak(1, player, EquipmentSlot.CHEST);
-
-                                // For performance, data component changes are not synchronised with the client by Ohmega,
-                                // so we must mark it as changed ourselves
-                                AccessoryHelper.getContainer(player).onContentsChanged(i);
                             }
                         }
                     }
@@ -51,7 +43,7 @@ public class CommonCallbacks {
             if (item.components().has(DataComponents.GLIDER)) {
                 ElytraAccessoryCommon.BOUND_ITEMS.add(item);
 
-                AccessoryHelper.bindAccessory(item, new GliderBinding());
+                Accessories.bind(item, new GliderBinding());
             }
         }
     }

@@ -6,9 +6,7 @@
     "NeoForge_LivingEntityMixin"
   ],
   "client": [
-    "client.ArmedEntityRenderStateMixin1",
-    "client.CapeLayerMixin",
-    "client.WingsLayerMixin1"
+    "client.CapeLayerMixin"
   ],
   "minVersion": "0.8.5"
 }

@@ -9,10 +9,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-// Used only on Forge and NeoForge
-@SuppressWarnings("UnusedMixin")
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin2 {
+public class Forge_LivingEntityMixin {
     @Inject(
             method = "updateFallFlying",
             at = @At(

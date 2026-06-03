@@ -4,12 +4,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "ArmorSlotMixin",
-    "LivingEntityMixin2"
+    "Forge_LivingEntityMixin"
   ],
   "client": [
-    "client.ArmedEntityRenderStateMixin1",
-    "client.CapeLayerMixin",
-    "client.WingsLayerMixin1"
+    "client.CapeLayerMixin"
   ],
   "minVersion": "0.8.5"
 }

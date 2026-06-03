@@ -32,7 +32,7 @@
   ],
   "depends": {
     "fabricloader": "${loaderFabricVRange}",
-    "minecraft": "${mcV}",
+    "minecraft": "~${mcVRangeMin}",
     "java": ">=${javaV}",
     "fabric-api": "*",
     "ohmega": "${loaderFabricOhmegaVRange}"

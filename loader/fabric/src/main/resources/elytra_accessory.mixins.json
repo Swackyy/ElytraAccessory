@@ -5,8 +5,6 @@
   "mixins": [
   ],
   "client": [
-    "client.ArmedEntityRenderStateMixin2",
-    "client.WingsLayerMixin2"
   ],
   "minVersion": "0.8.5"
 }

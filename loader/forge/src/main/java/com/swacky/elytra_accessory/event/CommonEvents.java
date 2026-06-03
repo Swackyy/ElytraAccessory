@@ -1,8 +1,9 @@
 package com.swacky.elytra_accessory.event;
 
 import com.swacky.elytra_accessory.common.ElytraAccessoryCommon;
+import com.swacky.ohmega.api.common.accessorytype.AccessoryType;
+import com.swacky.ohmega.api.event.AccessoryBindEvent;
 import com.swacky.ohmega.api.event.AccessoryOverrideTypesEvent;
-import com.swacky.ohmega.common.accessorytype.AccessoryType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackLocationInfo;
@@ -13,7 +14,6 @@ import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.event.AddPackFindersEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -45,14 +45,14 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public static void onOverrideAccessoryTypes(AccessoryOverrideTypesEvent event) {
-        for (Item item : ElytraAccessoryCommon.BOUND_ITEMS) {
-            event.overrides.put(item, AccessoryType.UTILITY.get());
-        }
+    public static void onBindAccessories(AccessoryBindEvent event) {
+        CommonCallbacks.bindElytras();
     }
 
     @SubscribeEvent
-    public static void onServerStart(ServerStartedEvent event) {
-        CommonCallbacks.bindElytras();
+    public static void onOverrideAccessoryTypes(AccessoryOverrideTypesEvent event) {
+        for (Item item : ElytraAccessoryCommon.BOUND_ITEMS) {
+            event.add(item, AccessoryType.UTILITY.get(), false);
+        }
     }
 }

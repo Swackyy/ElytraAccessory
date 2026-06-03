@@ -27,25 +27,26 @@ dependencies {
 
 processResources {
     var replaceProperties = [
-            javaV                                : javaV,
-            mcV                                  : mcV,
-            loaderFabricVRange                   : loaderFabricVRange,
-            loaderForgeVRange                    : loaderForgeVRange,
-            loaderNeoVRange                      : loaderNeoVRange,
-            loaderFabricOhmegaVRange             : loaderFabricOhmegaVRange,
-            ohmegaVRange                         : ohmegaVRange,
-            loaderForgeV                         : loaderForgeV,
-            loaderNeoV                           : loaderNeoV,
-            modV                                 : modV,
-            license                              : license,
-            modName                              : modNameDisplay,
-            modId                                : modId,
-            modAuthors                           : modAuthorsDisplay,
-            gitUrl                               : gitUrl,
-            curseUrl                             : curseUrl,
-            discordUrl                           : discordUrl,
-            modrinthUrl                          : modrinthUrl,
-            modDesc                              : modDesc,
+            license                  : license,
+            loaderFabricVRange       : loaderFabricVRange,
+            loaderForgeV             : loaderForgeV,
+            loaderForgeVRange        : loaderForgeVRange,
+            loaderNeoV               : loaderNeoV,
+            loaderNeoVRange          : loaderNeoVRange,
+            loaderFabricOhmegaVRange : loaderFabricOhmegaVRange,
+            ohmegaVRange             : ohmegaVRange,
+            modId                    : modId,
+            modV                     : modV,
+            modAuthors               : modAuthorsDisplay,
+            mcVRangeMin              : mcVRangeMin,
+            mcVRangeMax              : mcV,
+            modName                  : modName,
+            curseUrl                 : curseUrl,
+            discordUrl               : discordUrl,
+            gitUrl                   : gitUrl,
+            modrinthUrl              : modrinthUrl,
+            modDesc                  : modDesc,
+            javaV                    : javaV
     ]
 
     inputs.properties replaceProperties
@@ -104,7 +105,12 @@ if (rootProject.file("secrets.properties").exists()) {
                 serverRequired = true
 
                 javaVersions.add(JavaVersion.toVersion(javaV))
-                minecraftVersions.add(mcV)
+
+                minecraftVersionRange {
+                    start = mcVRangeMin
+                    end = mcV
+                }
+
                 requires "ohmega"
             }
 
@@ -113,7 +119,11 @@ if (rootProject.file("secrets.properties").exists()) {
                 projectId = "pLVRp7qd"
                 version = modV
 
-                minecraftVersions.add(mcV)
+                minecraftVersionRange {
+                    start = mcVRangeMin
+                    end = mcV
+                }
+
                 requires "ohmega"
             }
         }

@@ -2,7 +2,7 @@ package com.swacky.elytra_accessory.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.swacky.elytra_accessory.mixinutils.AccessoryRenderStateData;
+import com.swacky.ohmega.client.renderer.AccessoryRenderStateData;
 import net.minecraft.client.renderer.entity.layers.WingsLayer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.core.component.DataComponents;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(WingsLayer.class)
-public class WingsLayerMixin2 {
+public class WingsLayerMixin {
     @ModifyExpressionValue(
             method = "submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/HumanoidRenderState;FF)V",
             at = @At(
@@ -23,10 +23,10 @@ public class WingsLayerMixin2 {
                     opcode = Opcodes.GETFIELD))
     public ItemStack submit(ItemStack original, @Local(argsOnly = true) HumanoidRenderState state) {
         if (!LivingEntity.canGlideUsing(original, EquipmentSlot.CHEST)) {
-            AccessoryRenderStateData data = state.getData(AccessoryRenderStateData.KEY);
+            AccessoryRenderStateData data = AccessoryRenderStateData.getData(state);
 
             if (data != null) {
-                for (ItemStack stack : data.items()) {
+                for (ItemStack stack : data.stacks()) {
                     if (stack.has(DataComponents.GLIDER)) {
                         return stack;
                     }

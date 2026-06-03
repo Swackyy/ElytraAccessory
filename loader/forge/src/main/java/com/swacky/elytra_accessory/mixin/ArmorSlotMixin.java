@@ -18,9 +18,9 @@ public class ArmorSlotMixin {
     @Shadow @Final private EquipmentSlot slot;
 
     @Inject(method = "mayPlace", at = @At(value = "HEAD"), cancellable = true)
-    public void mayPlace(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        // Overwrite forge behaviour if this returns false
-        if (!owner.isEquippableInSlot(stack, slot)) {
+    public void mayPlace(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
+        // Overwrite Forge behaviour if this returns false
+        if (!owner.isEquippableInSlot(itemStack, slot)) {
             cir.setReturnValue(false);
         }
     }

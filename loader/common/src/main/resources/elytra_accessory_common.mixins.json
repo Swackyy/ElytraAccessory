@@ -5,9 +5,10 @@
   "mixins": [
     "EquippableMixin",
     "InventoryMenuMixin",
-    "LivingEntityMixin1"
+    "LivingEntityMixin"
   ],
   "client": [
+    "client.WingsLayerMixin"
   ],
   "minVersion": "0.8.5"
 }
