@@ -1,6 +1,6 @@
 package com.swacky.elytra_accessory.datagen;
 
-import com.swacky.elytra_accessory.common.ElytraAccessoryCommon;
+import com.swacky.elytra_accessory.common.ElytraAccessory;
 import com.swacky.elytra_accessory.datagen.client.ElytraAccessoryEnUsProvider;
 import com.swacky.elytra_accessory.datagen.server.ElytraAccessoryTypeProvider;
 import com.swacky.ohmega.common.init.OhmegaTags;
@@ -22,12 +22,12 @@ public class ElytraAccessoryDataGeneration implements DataGeneratorEntrypoint {
 
         // Server
         pack.addProvider((FabricDataGenerator.Pack.Factory<ElytraAccessoryTypeProvider>) ElytraAccessoryTypeProvider::new);
-        generator.createBuiltinResourcePack(ElytraAccessoryCommon.PACK_ID).addProvider((output, lookupProvider) ->
+        generator.createBuiltinResourcePack(ElytraAccessory.PACK_ID).addProvider((output, lookupProvider) ->
                 new FabricTagsProvider.ItemTagsProvider(output, lookupProvider) {
                     @SuppressWarnings("deprecation")
                     @Override
                     protected void addTags(HolderLookup.@NonNull Provider lookupProvider) {
-                        builder(OhmegaTags.get(ElytraAccessoryCommon.id("elytra"))).add(Items.ELYTRA.builtInRegistryHolder().key());
+                        builder(OhmegaTags.get(ElytraAccessory.id("elytra"))).add(Items.ELYTRA.builtInRegistryHolder().key());
                     }
                 }
         );

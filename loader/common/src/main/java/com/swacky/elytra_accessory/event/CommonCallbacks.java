@@ -1,6 +1,6 @@
 package com.swacky.elytra_accessory.event;
 
-import com.swacky.elytra_accessory.common.ElytraAccessoryCommon;
+import com.swacky.elytra_accessory.common.ElytraAccessory;
 import com.swacky.elytra_accessory.common.accessory.GliderBinding;
 import com.swacky.ohmega.api.common.item.Accessories;
 import com.swacky.ohmega.api.common.item.AccessoryHelper;
@@ -41,7 +41,7 @@ public final class CommonCallbacks {
     public static void bindElytras() {
         for (Item item : BuiltInRegistries.ITEM) {
             if (item.components().has(DataComponents.GLIDER)) {
-                ElytraAccessoryCommon.BOUND_ITEMS.add(item);
+                ElytraAccessory.BOUND_ITEMS.add(item);
 
                 Accessories.bind(item, new GliderBinding());
             }

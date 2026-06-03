@@ -17,10 +17,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.swacky.${modId}.common.ElytraAccessory"
+      "com.swacky.${modId}.common.ElytraAccessoryMain"
     ],
     "client": [
-      "com.swacky.${modId}.client.ElytraAccessoryClient"
+      "com.swacky.${modId}.client.ElytraAccessoryClientMain"
     ],
     "fabric-datagen": [
       "com.swacky.${modId}.datagen.ElytraAccessoryDataGeneration"

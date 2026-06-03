@@ -1,6 +1,6 @@
 package com.swacky.elytra_accessory.event;
 
-import com.swacky.elytra_accessory.common.ElytraAccessoryCommon;
+import com.swacky.elytra_accessory.common.ElytraAccessory;
 import com.swacky.ohmega.api.common.accessorytype.AccessoryType;
 import com.swacky.ohmega.api.event.AccessoryBindEvent;
 import com.swacky.ohmega.api.event.AccessoryOverrideTypesEvent;
@@ -35,7 +35,7 @@ public class CommonEvents {
     }
 
     private static void onOverrideAccessoryTypes(Map<Item, BooleanObjectPair<AccessoryType>> map) {
-        for(Item item : ElytraAccessoryCommon.BOUND_ITEMS) {
+        for(Item item : ElytraAccessory.BOUND_ITEMS) {
             map.put(item, BooleanObjectPair.of(false, AccessoryType.UTILITY.get()));
         }
     }

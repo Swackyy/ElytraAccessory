@@ -8,8 +8,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 
 @SuppressWarnings("unused")
-public class ElytraAccessory implements ModInitializer {
-    private static final Identifier ID = ElytraAccessoryCommon.id("elytra_type");
+public class ElytraAccessoryMain implements ModInitializer {
+    private static final Identifier ID = ElytraAccessory.id("elytra_type");
 
     @Override
     public void onInitialize() {
@@ -17,7 +17,7 @@ public class ElytraAccessory implements ModInitializer {
 
         ResourceLoader.registerBuiltinPack(
                 ID,
-                FabricLoader.getInstance().getModContainer(ElytraAccessoryCommon.MODID).orElseThrow(),
+                FabricLoader.getInstance().getModContainer(ElytraAccessory.MODID).orElseThrow(),
                 PackActivationType.NORMAL);
     }
 }

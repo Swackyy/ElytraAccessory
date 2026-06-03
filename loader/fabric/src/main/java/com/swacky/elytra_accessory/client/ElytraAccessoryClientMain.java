@@ -4,7 +4,7 @@ import com.swacky.elytra_accessory.event.ClientEvents;
 import net.fabricmc.api.ClientModInitializer;
 
 @SuppressWarnings("unused")
-public class ElytraAccessoryClient implements ClientModInitializer {
+public class ElytraAccessoryClientMain implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientEvents.bootstrap();

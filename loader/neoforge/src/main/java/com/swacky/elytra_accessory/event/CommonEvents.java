@@ -1,6 +1,6 @@
 package com.swacky.elytra_accessory.event;
 
-import com.swacky.elytra_accessory.common.ElytraAccessoryCommon;
+import com.swacky.elytra_accessory.common.ElytraAccessory;
 import com.swacky.ohmega.api.common.accessorytype.AccessoryType;
 import com.swacky.ohmega.api.event.AccessoryBindEvent;
 import com.swacky.ohmega.api.event.AccessoryOverrideTypesEvent;
@@ -14,12 +14,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 
-@EventBusSubscriber(modid = ElytraAccessoryCommon.MODID)
+@EventBusSubscriber(modid = ElytraAccessory.MODID)
 public class CommonEvents {
     @SubscribeEvent
     public static void onAddPackFinders(AddPackFindersEvent event) {
         event.addPackFinders(
-            Identifier.fromNamespaceAndPath(ElytraAccessoryCommon.MODID, "resourcepacks/elytra_type"),
+            Identifier.fromNamespaceAndPath(ElytraAccessory.MODID, "resourcepacks/elytra_type"),
             PackType.SERVER_DATA,
             Component.translatable("dataPack.elytra_type.name"),
             PackSource.FEATURE,
@@ -34,7 +34,7 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void onOverrideAccessoryTypes(AccessoryOverrideTypesEvent event) {
-        for (Item item : ElytraAccessoryCommon.BOUND_ITEMS) {
+        for (Item item : ElytraAccessory.BOUND_ITEMS) {
             event.add(item, AccessoryType.UTILITY.get(), false);
         }
     }
